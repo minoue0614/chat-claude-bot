@@ -16,7 +16,7 @@ async def run(channel_id: str, message: str) -> str:
 
     session_id = session_store.get(channel_id)
 
-    cmd = ["claude", "--output-format", "json"]
+    cmd = ["claude", "--output-format", "json", "--permission-mode", "dontAsk"]
     if session_id:
         cmd += ["--resume", session_id]
     cmd += ["-p", message]
