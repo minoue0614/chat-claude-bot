@@ -3,13 +3,12 @@ Chatwork Bot (Webhook受信サーバー)
 - Chatwork の Webhook を受け取り Claude に転送する
 - ルームごとにセッションを維持する
 """
-import os
 import hmac
 import hashlib
 import asyncio
 import aiohttp
 from aiohttp import web
-import claude_runner
+from . import claude_runner
 
 CHATWORK_API_BASE = "https://api.chatwork.com/v2"
 
@@ -17,7 +16,6 @@ CHATWORK_API_BASE = "https://api.chatwork.com/v2"
 async def send_message(room_id: int, text: str, api_token: str):
     url = f"{CHATWORK_API_BASE}/rooms/{room_id}/messages"
     headers = {"X-ChatWorkToken": api_token}
-    # Chatworkの1メッセージ上限は約4万字なので基本分割不要
     async with aiohttp.ClientSession() as session:
         await session.post(url, headers=headers, data={"body": text})
 

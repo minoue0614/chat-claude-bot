@@ -4,7 +4,8 @@
 import json
 from pathlib import Path
 
-SESSION_FILE = Path(__file__).parent / "sessions.json"
+DATA_DIR = Path.home() / ".local" / "share" / "chat-claude-bot"
+SESSION_FILE = DATA_DIR / "sessions.json"
 
 
 def _load() -> dict:
@@ -14,6 +15,7 @@ def _load() -> dict:
 
 
 def _save(data: dict):
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     SESSION_FILE.write_text(json.dumps(data, indent=2))
 
 

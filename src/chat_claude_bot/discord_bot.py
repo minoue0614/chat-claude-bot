@@ -3,9 +3,8 @@ Discord Bot
 - メンション or DMで反応する
 - チャンネルごとにセッションを維持する
 """
-import os
 import discord
-import claude_runner
+from . import claude_runner
 
 intents = discord.Intents.default()
 intents.message_content = True
